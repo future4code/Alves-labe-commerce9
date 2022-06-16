@@ -69,7 +69,7 @@ margin-bottom: 2vh;
 
 class App extends React.Component {
   state = {
-    minValueInput: 10,
+    minValueInput: 0,
     maxValueInput: 1050,
     nameInput: '',
     OrdenarLista:"",
