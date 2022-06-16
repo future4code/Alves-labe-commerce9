@@ -71,6 +71,7 @@ class App extends React.Component {
     minValueInput: 10,
     maxValueInput: 1050,
     nameInput: '',
+    OrdenarLista:"",
     produtos: [
       {
         nome: "Meteorito",
@@ -78,14 +79,14 @@ class App extends React.Component {
         imagem: meteorito1,
       },
       {
-        nome: "Meteorito Safira",
-        preco: 150,
-        imagem: meteorito2,
-      },
-      {
         nome: "Meteorito Topázio",
         preco: 550,
         imagem: meteorito3,
+      },
+      {
+        nome: "Meteorito Safira",
+        preco: 150,
+        imagem: meteorito2,
       },
       {
         nome: "Meteorito Lunar",
@@ -106,10 +107,24 @@ class App extends React.Component {
   handleChangeName = (event) => {
     this.setState({ nameInput: event.target.value })
   }
+  
+handleChangeOrdem = (event) => {
+  this.setState ({OrdenarLista:event.target.value})
+}
 
   render() {
 
-    const listaFiltrada = this.state.produtos.map((produto) => {
+    const filtroOrdem = this.state.produtos
+    const optionOrder = this.state.OrdenarLista
+    filtroOrdem.sort(function(a,b){
+      if(optionOrder === "Cres" ){
+        return a.preco < b.preco ? -1: a.preco> b.preco ? 1: 0;
+      }else{
+        return b.preco < a.preco ? -1: b.preco> a.preco ? 1: 0;
+      }
+    });
+    
+    const listaFiltrada = filtroOrdem.map((produto) => {
       if ((this.state.minValueInput <= produto.preco && this.state.maxValueInput >= produto.preco) && produto.nome.toLowerCase().includes(this.state.nameInput)) {
         return (
           <Card
@@ -143,7 +158,10 @@ class App extends React.Component {
             <p>Quantidade de produtos: x</p>
             <FilterSelect>
               <p>Ordenação</p>
-              <select></select>
+              <select onChange={this.handleChangeOrdem}>
+                <option value="Cres">Valor Crescente</option>
+                <option value="DCres">Valor Decrescente</option>
+              </select>
             </FilterSelect>
           </TopContainer>
           <BottomContainer>
