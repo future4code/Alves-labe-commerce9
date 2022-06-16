@@ -126,6 +126,12 @@ handleChangeOrdem = (event) => {
     
     const listaFiltrada = filtroOrdem.map((produto) => {
       if ((this.state.minValueInput <= produto.preco && this.state.maxValueInput >= produto.preco) && produto.nome.toLowerCase().includes(this.state.nameInput)) {
+
+    const listaFiltrada2 = this.state.produtos.filter((produto) => {
+      return this.state.minValueInput <= produto.preco && this.state.maxValueInput >= produto.preco && produto.nome.toLowerCase().includes(this.state.nameInput)
+    })
+
+    const listaFiltrada = listaFiltrada2.map((produto) => {
         return (
           <Card
             nome={produto.nome}
@@ -133,7 +139,6 @@ handleChangeOrdem = (event) => {
             imagem={produto.imagem}>
           </Card>
         )
-      }
     })
 
     return (
@@ -155,7 +160,7 @@ handleChangeOrdem = (event) => {
         </FilterContainer>
         <CentralContainer>
           <TopContainer>
-            <p>Quantidade de produtos: x</p>
+            <p>Quantidade de produtos: {listaFiltrada2.length}</p>
             <FilterSelect>
               <p>Ordenação</p>
               <select onChange={this.handleChangeOrdem}>
