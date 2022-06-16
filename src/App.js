@@ -142,7 +142,8 @@ class App extends React.Component {
     
   }
 
-  removeCartItem = (nome, quantity) => {
+  removeCartItem = (nome, quantity, preco) => {
+    this.setState({valorTotal: this.state.valorTotal - preco})
     if (quantity <= 1){
       const newCartItems = this.state.cartItems.filter((item) => {
         return item.nome != nome
@@ -199,6 +200,7 @@ class App extends React.Component {
           name={item.nome}
           quantity={item.quantity}
           removeCartItem={this.removeCartItem}
+          preco={item.preco}
         >
         </ItemCarrinho>
       )
