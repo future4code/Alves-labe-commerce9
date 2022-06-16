@@ -5,23 +5,39 @@ import styled from 'styled-components'
 const MainContainer = styled.div`
 display: flex;
 flex-direction: column;
-width: 35%;
+width: 18vw;
 border: 1px solid black;
 height: 100%;
+margin-bottom: 1vh;
 `
 
 const MainContainer2 = styled.div`
 display: flex;
 flex-direction: column;
-width: 35%;
-border: 1px solid black;
-height: 100%;
+justify-content: flex-end;
+height: 35%;
+border-top: 1px solid black;
 `
 
 const ImagemME = styled.img`
-height: 50%;
+height: 70%;
 width: 100%;
-margin-right: 10px;
+`
+
+const Infos = styled.p`
+    margin: 0 1vw;
+
+`
+const ButtonAdd = styled.button`
+width: 50%;
+align-self: center;
+margin: 3vh;
+`
+
+const ImageContainer = styled.div`
+height: 100%;
+display: flex;
+align-items: center;
 `
 
 export default class Card extends Component {
@@ -30,9 +46,14 @@ export default class Card extends Component {
 
         return (
             <MainContainer>
-                <ImagemME src={this.props.imagem} />
-                <p>{this.props.nome}</p>
-                <p>{this.props.preco}</p>
+                <ImageContainer>
+                    <ImagemME src={this.props.imagem} />
+                </ImageContainer>
+                <MainContainer2>
+                    <Infos>{this.props.nome}</Infos>
+                    <Infos>R${this.props.preco},00</Infos>
+                    <ButtonAdd>Adicionar ao carrinho</ButtonAdd>
+                </MainContainer2>
             </MainContainer>
         )
     }
