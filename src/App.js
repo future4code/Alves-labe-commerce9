@@ -109,8 +109,11 @@ class App extends React.Component {
 
   render() {
 
-    const listaFiltrada = this.state.produtos.map((produto) => {
-      if ((this.state.minValueInput <= produto.preco && this.state.maxValueInput >= produto.preco) && produto.nome.toLowerCase().includes(this.state.nameInput)) {
+    const listaFiltrada2 = this.state.produtos.filter((produto) => {
+      return this.state.minValueInput <= produto.preco && this.state.maxValueInput >= produto.preco && produto.nome.toLowerCase().includes(this.state.nameInput)
+    })
+
+    const listaFiltrada = listaFiltrada2.map((produto) => {
         return (
           <Card
             nome={produto.nome}
@@ -118,7 +121,6 @@ class App extends React.Component {
             imagem={produto.imagem}>
           </Card>
         )
-      }
     })
 
     return (
@@ -140,7 +142,7 @@ class App extends React.Component {
         </FilterContainer>
         <CentralContainer>
           <TopContainer>
-            <p>Quantidade de produtos: x</p>
+            <p>Quantidade de produtos: {listaFiltrada2.length}</p>
             <FilterSelect>
               <p>Ordenação</p>
               <select></select>
