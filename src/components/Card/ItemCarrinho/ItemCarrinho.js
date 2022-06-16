@@ -14,7 +14,7 @@ width: 40%;
 export default class ItemCarrinho extends Component {
 
     handleClick = () => {
-        this.props.removeCartItem(this.props.name, this.props.quantity)
+        this.props.removeCartItem(this.props.name, this.props.quantity, this.props.preco)
     }
 
     render() {
