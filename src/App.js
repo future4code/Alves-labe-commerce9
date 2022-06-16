@@ -1,7 +1,37 @@
 import React from 'react'
 import styled from 'styled-components'
-import CentralContainer from './components/CentralContainer/CentralContainer'
+import Card from './components/Card/Card.js'
+import meteorito1 from './img/meteorito1.png'
+import meteorito2 from './img/meteorito2.png'
+import meteorito3 from './img/meteorito3.jpg'
+import meteorito4 from './img/meteorito4.png'
 
+
+const CentralContainer = styled.div`
+width: 80%;
+height: 55%;
+display: flex;
+flex-direction: column;
+padding: 16px;
+`
+
+const TopContainer = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+margin-right: 5vw;
+`
+
+const BottomContainer = styled.div`
+height: 100%;
+display: flex;
+flex-wrap: wrap;
+gap: 2%;
+`
+
+const FilterSelect = styled.div`
+display:flex;
+`
 
 const MainContainer = styled.div`
 padding: 16px;
@@ -41,6 +71,28 @@ class App extends React.Component {
     minValueInput: 10,
     maxValueInput: 1050,
     nameInput: '',
+    produtos: [
+      {
+        nome: "Meteorito",
+        preco: 50,
+        imagem: meteorito1,
+      },
+      {
+        nome: "Meteorito Safira",
+        preco: 150,
+        imagem: meteorito2,
+      },
+      {
+        nome: "Meteorito Topázio",
+        preco: 550,
+        imagem: meteorito3,
+      },
+      {
+        nome: "Meteorito Lunar",
+        preco: 1050,
+        imagem: meteorito4,
+      },
+    ]
   }
 
   handleChangeMinValue = (event) => {
@@ -49,7 +101,6 @@ class App extends React.Component {
 
   handleChangeMaxValue = (event) => {
     this.setState({ maxValueInput: event.target.value })
-    console.log(event.target.value)
   }
 
   handleChangeName = (event) => {
@@ -57,13 +108,26 @@ class App extends React.Component {
   }
 
   render() {
+
+    const listaFiltrada = this.state.produtos.map((produto) => {
+      if ((this.state.minValueInput <= produto.preco && this.state.maxValueInput >= produto.preco) && produto.nome.toLowerCase().includes(this.state.nameInput)) {
+        return (
+          <Card
+            nome={produto.nome}
+            preco={produto.preco}
+            imagem={produto.imagem}>
+          </Card>
+        )
+      }
+    })
+
     return (
       <MainContainer>
         <FilterContainer>
           <Title>Filtros</Title>
           <Label>
             Valor Mínimo
-            <input type="number" onChange={this.handleChangeMinValue} value={this.state.minValueInput}/>
+            <input type="number" onChange={this.handleChangeMinValue} value={this.state.minValueInput} />
           </Label>
           <Label>
             Valor Máximo
@@ -71,14 +135,21 @@ class App extends React.Component {
           </Label>
           <Label>
             Busca por nome:
-            <input type="text" onChange={this.handleChangeName} placeholder='Nome do produto'/>
+            <input type="text" onChange={this.handleChangeName} placeholder='Nome do produto' />
           </Label>
         </FilterContainer>
-        <CentralContainer
-          minValue={this.state.minValueInput}
-          maxValue={this.state.maxValueInput}
-          nameFilter={this.state.nameInput}
-        ></CentralContainer>
+        <CentralContainer>
+          <TopContainer>
+            <p>Quantidade de produtos: x</p>
+            <FilterSelect>
+              <p>Ordenação</p>
+              <select></select>
+            </FilterSelect>
+          </TopContainer>
+          <BottomContainer>
+            {listaFiltrada}
+          </BottomContainer>
+        </CentralContainer>
         <CartContainer>
           <Title>Carrinho:</Title>
         </CartContainer>
