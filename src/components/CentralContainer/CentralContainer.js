@@ -19,62 +19,76 @@ const TopContainer = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
+margin-right: 5vw;
 `
 
 const BottomContainer = styled.div`
 height: 100%;
 display: flex;
+flex-wrap: wrap;
+gap: 2%;
+`
+
+const FilterSelect = styled.div`
+display:flex;
 `
 
 export default class CentralContainer extends Component {
-    state = {
-        produtos: [
-          {
-            nome: "meteorito 1",
-            preco: "50",
-            imagem: meteorito1
-          },
-          {
-            nome: "meteorito 2",
-            preco: "150",
-            imagem: meteorito2
-          },
-          {
-            nome: "meteorito 3",
-            preco: '550',
-            imagem: meteorito3
-          },
-          {
-            nome: "meteorito 4",
-            preco: '1050',
-            imagem: meteorito4
-          },
-        ]
-      }
+  state = {
+    produtos: [
+      {
+        nome: "Meteorito",
+        preco: 50,
+        imagem: meteorito1,
+      },
+      {
+        nome: "Meteorito Safira",
+        preco: 150,
+        imagem: meteorito2,
+      },
+      {
+        nome: "Meteorito Topázio",
+        preco: 550,
+        imagem: meteorito3,
+      },
+      {
+        nome: "Meteorito Lunar",
+        preco: 1050,
+        imagem: meteorito4,
+      },
+    ]
+  }
+
 
   render() {
 
-    const listaDeProdutos = this.state.produtos.map((produto) => {
+    const listaFiltrada = this.state.produtos.map((produto) => {
+      if((this.props.minValue <= produto.preco && this.props.maxValue >= produto.preco) && produto.nome.toLowerCase().includes(this.props.nameFilter)) {
         return (
           <Card
             nome={produto.nome}
             preco={produto.preco}
-            imagem={produto.imagem}>
+            imagem={produto.imagem}
+            display={produto.display}>
           </Card>
         )
-      })
-  
+      }
+    })
+
     return (
       <MainContainer>
         <TopContainer>
-            <p>Quantidade de produtos: x</p>
+          <p>Quantidade de produtos: x</p>
+          <FilterSelect>
             <p>Ordenação</p>
+            <select></select>
+          </FilterSelect>
         </TopContainer>
         <BottomContainer>
-            {listaDeProdutos}
+          {listaFiltrada}
         </BottomContainer>
-        
-    </MainContainer>
+
+      </MainContainer>
     )
   }
 }
