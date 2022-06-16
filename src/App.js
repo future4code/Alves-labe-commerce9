@@ -123,9 +123,6 @@ handleChangeOrdem = (event) => {
         return b.preco < a.preco ? -1: b.preco> a.preco ? 1: 0;
       }
     });
-    
-    const listaFiltrada = filtroOrdem.map((produto) => {
-      if ((this.state.minValueInput <= produto.preco && this.state.maxValueInput >= produto.preco) && produto.nome.toLowerCase().includes(this.state.nameInput)) {
 
     const listaFiltrada2 = this.state.produtos.filter((produto) => {
       return this.state.minValueInput <= produto.preco && this.state.maxValueInput >= produto.preco && produto.nome.toLowerCase().includes(this.state.nameInput)
@@ -180,6 +177,5 @@ handleChangeOrdem = (event) => {
     )
   }
 }
-
 
 export default App
