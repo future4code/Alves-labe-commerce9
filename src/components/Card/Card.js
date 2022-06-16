@@ -42,6 +42,10 @@ align-items: center;
 
 export default class Card extends Component {
 
+    handleClick = () => {
+        this.props.addCartItem(this.props.nome, this.props.preco)
+    }
+
     render() {
 
         return (
@@ -52,7 +56,7 @@ export default class Card extends Component {
                 <MainContainer2>
                     <Infos>{this.props.nome}</Infos>
                     <Infos>R${this.props.preco},00</Infos>
-                    <ButtonAdd>Adicionar ao carrinho</ButtonAdd>
+                    <ButtonAdd onClick={this.handleClick}>Adicionar ao carrinho</ButtonAdd>
                 </MainContainer2>
             </MainContainer>
         )

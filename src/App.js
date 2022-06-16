@@ -5,6 +5,7 @@ import meteorito1 from './img/meteorito1.png'
 import meteorito2 from './img/meteorito2.png'
 import meteorito3 from './img/meteorito3.jpg'
 import meteorito4 from './img/meteorito4.png'
+import ItemCarrinho from './components/Card/ItemCarrinho/ItemCarrinho.js'
 
 
 const CentralContainer = styled.div`
@@ -93,7 +94,9 @@ class App extends React.Component {
         preco: 1050,
         imagem: meteorito4,
       },
-    ]
+    ],
+    cartItems: [],
+    valorTotal: 0
   }
 
   handleChangeMinValue = (event) => {
@@ -108,9 +111,60 @@ class App extends React.Component {
     this.setState({ nameInput: event.target.value })
   }
   
-handleChangeOrdem = (event) => {
+  handleChangeOrdem = (event) => {
   this.setState ({OrdenarLista:event.target.value})
-}
+  }
+
+  addCartItem = (nome, preco) => {
+    this.setState({valorTotal: this.state.valorTotal + preco})
+    const newCartItems = this.state.cartItems.map(obj => {
+      if (obj.nome === nome) {
+        return {...obj, quantity: obj.quantity + 1};
+      }
+    
+      return obj;
+    })
+    this.setState({cartItems: newCartItems})
+    const nameList = this.state.cartItems.map((item) => {
+      return item.nome
+    })
+    if(nameList.includes(nome)){
+      return
+    }
+    const newItem = {
+      nome: nome,
+      quantity: 1,
+      preco: preco
+    }
+    
+		const newCartItems1 = [...this.state.cartItems, newItem] 
+		this.setState({ cartItems: newCartItems1,})
+    
+  }
+
+  removeCartItem = (nome, quantity) => {
+    if (quantity <= 1){
+      const newCartItems = this.state.cartItems.filter((item) => {
+        return item.nome != nome
+      })
+      this.setState({cartItems: newCartItems})
+      return
+    }
+    const newQuantity = this.state.cartItems.map(obj => {
+      if (obj.nome === nome) {
+        return {...obj, quantity: quantity - 1};
+      }
+    
+      return obj;
+    })
+    this.setState({cartItems: newQuantity})
+    const nameList = this.state.cartItems.map((item) => {
+      return item.nome
+    })
+    if(nameList.includes(nome)){
+      return
+    }
+  }
 
   render() {
 
@@ -131,11 +185,23 @@ handleChangeOrdem = (event) => {
     const listaFiltrada = listaFiltrada2.map((produto) => {
         return (
           <Card
+            addCartItem={this.addCartItem}
             nome={produto.nome}
             preco={produto.preco}
             imagem={produto.imagem}>
           </Card>
         )
+    })
+    
+    const cartList = this.state.cartItems.map((item) => {
+      return (
+        <ItemCarrinho
+          name={item.nome}
+          quantity={item.quantity}
+          removeCartItem={this.removeCartItem}
+        >
+        </ItemCarrinho>
+      )
     })
 
     return (
@@ -172,6 +238,8 @@ handleChangeOrdem = (event) => {
         </CentralContainer>
         <CartContainer>
           <Title>Carrinho:</Title>
+          {cartList}
+          <p>Valor Total: R${this.state.valorTotal},00</p>
         </CartContainer>
       </MainContainer>
     )
