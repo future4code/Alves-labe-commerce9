@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import Card from './components/Card/Card.js'
 import meteorito1 from './img/meteorito1.png'
 import meteorito2 from './img/meteorito2.png'
-import meteorito3 from './img/meteorito3.jpg'
+import meteorito3 from './img/meteorito3.png'
 import meteorito4 from './img/meteorito4.png'
 import ItemCarrinho from './components/Card/ItemCarrinho/ItemCarrinho.js'
-
+import LogoTitulo from './img/LogoTitulo.png'
 
 const CentralContainer = styled.div`
 width: 80%;
@@ -28,10 +28,12 @@ height: 100%;
 display: flex;
 flex-wrap: wrap;
 gap: 2%;
+flex-direction:row;
 `
 
 const FilterSelect = styled.div`
 display:flex;
+padding-bottom: 5%;
 `
 
 const MainContainer = styled.div`
@@ -39,6 +41,7 @@ padding: 16px;
 height: 100vh;
 display: flex;
 gap: 1%;
+background-color:#9F8DB8;
 `
 const FilterContainer = styled.div`
 display: flex;
@@ -47,6 +50,8 @@ border: 1px solid black;
 width: 18%;
 height: 55%;
 padding: 16px;
+box-shadow: 15px 20px 8px #5F4B8B;
+background-color:#8E6385;
 `
 const CartContainer = styled.div`
 display: flex;
@@ -55,16 +60,32 @@ border: 1px solid black;
 width: 25%;
 height: 55%;
 padding: 16px;
+box-shadow: 15px 20px 8px #5F4B8B;
+background-color:#8E6385;
 `
 
 const Title = styled.h3`
 margin-bottom: 4vh;
+`
+const TitleLoja = styled.h3`
+margin-bottom: 4vh;
+display:flex;
+justify-content:center;
 `
 const Label = styled.label`
 display: flex;
 flex-direction: column;
 width: 70%;
 margin-bottom: 2vh;
+`
+const Selecoes = styled.select`
+background-color:#8F85D8;
+height :80%;
+width:40%;
+margin-top:10px;
+border-radius: 15px;
+`
+const OpcoesSel = styled.option`
 `
 
 class App extends React.Component {
@@ -224,14 +245,16 @@ class App extends React.Component {
           </Label>
         </FilterContainer>
         <CentralContainer>
+          <meteorito1/>
+          <TitleLoja>Loja 09 de METEORITOS</TitleLoja>
           <TopContainer>
             <p>Quantidade de produtos: {listaFiltrada2.length}</p>
             <FilterSelect>
-              <p>Ordenação</p>
-              <select onChange={this.handleChangeOrdem}>
-                <option value="Cres">Valor Crescente</option>
-                <option value="DCres">Valor Decrescente</option>
-              </select>
+              <p>Ordenar por:</p>
+              <Selecoes onChange={this.handleChangeOrdem}>
+                <OpcoesSel value="Cres">Valor Crescente</OpcoesSel>
+                <OpcoesSel value="DCres">Valor Decrescente</OpcoesSel>
+              </Selecoes>
             </FilterSelect>
           </TopContainer>
           <BottomContainer>
