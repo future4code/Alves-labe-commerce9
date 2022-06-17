@@ -9,6 +9,7 @@ width: 18vw;
 border: 1px solid black;
 height: 100%;
 margin-bottom: 1vh;
+box-shadow: 2px 2px 8px #A13B6D;
 `
 
 const MainContainer2 = styled.div`
@@ -24,7 +25,7 @@ height: 70%;
 width: 100%;
 `
 
-const Infos = styled.p`
+const Infos = styled.b`
     margin: 0 1vw;
 
 `
@@ -32,6 +33,8 @@ const ButtonAdd = styled.button`
 width: 50%;
 align-self: center;
 margin: 3vh;
+border-radius: 15px;
+box-shadow: 5px 5px 8px white;
 `
 
 const ImageContainer = styled.div`
