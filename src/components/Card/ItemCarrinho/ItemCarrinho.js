@@ -10,7 +10,12 @@ align-items: center;
 const RemoveBtn = styled.button`
 width: 40%;
 border-radius: 15px;
-box-shadow: 5px 5px 8px white;
+background-color:#8E6385;
+font-weight: bold;
+:hover {
+    background-color: red;
+    cursor: pointer;
+}
 `
 
 export default class ItemCarrinho extends Component {
