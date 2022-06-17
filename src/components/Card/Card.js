@@ -6,18 +6,18 @@ const MainContainer = styled.div`
 display: flex;
 flex-direction: column;
 width: 18vw;
-border: 1px solid black;
-height: 300px;
+border: 2px solid black;
 margin-bottom: 1vh;
-box-shadow: 2px 2px 8px #A13B6D;
+box-shadow: 2px 2px 15px #5F4B8B;
+border-radius: 24px;
 `
 
 const MainContainer2 = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: flex-end;
-/* height: 35%; */
-border-top: 1px solid black;
+border-top: 2px solid black;
+padding-top: 2vh;
 `
 
 const ImagemME = styled.img`
@@ -35,7 +35,16 @@ width: 50%;
 align-self: center;
 margin: 3vh;
 border-radius: 15px;
-box-shadow: 5px 5px 8px white;
+background-color: #9F8DB8;
+border: 3px solid black;
+font-weight: 600;
+padding: 14px;
+:hover {
+    box-shadow: inset 1px 1px 10px white, 1px 1px 10px white;
+    color: white;
+    border: 3px solid white;
+    cursor: pointer;
+}
 `
 
 const ImageContainer = styled.div`

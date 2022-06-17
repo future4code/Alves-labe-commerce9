@@ -11,7 +11,7 @@ import { createGlobalStyle } from 'styled-components'
 
 const CentralContainer = styled.div`
 width: 80%;
-height: 55%;
+height: 100%;
 display: flex;
 flex-direction: column;
 padding: 16px;
@@ -34,42 +34,59 @@ const FilterSelect = styled.div`
 display:flex;
 padding-bottom: 5%;
 width: 35%;
+justify-content: flex-end;
 `
 
 const MainContainer = styled.div`
+height: 100%;
 padding: 16px;
 display: flex;
 gap: 1%;
-background-color:#9F8DB8;
 `
 const FilterContainer = styled.div`
 display: flex;
 flex-direction: column; 
-border: 1px solid black;
-width: 18%;
-height: 55%;
+justify-content: space-between;
+border: 2px solid black;
+width: 18vw;
+height: 42vh;
 padding: 16px;
-box-shadow: 15px 20px 8px #5F4B8B;
+box-shadow: 10px 15px 8px #5F4B8B;
 background-color:#8E6385;
+border-radius: 24px;
+margin-top: 20vh;
 `
 const CartContainer = styled.div`
 display: flex;
 flex-direction: column; 
-border: 1px solid black;
-width: 25%;
-height: 55%;
+border: 2px solid black;
+justify-content: space-between;
+width: 25vw;
+height: 42vh;
 padding: 16px;
-box-shadow: 15px 20px 8px #5F4B8B;
+box-shadow: 10px 15px 8px #5F4B8B;
 background-color:#8E6385;
+border-radius: 24px;
+margin-top: 20vh;
 `
-
+const CartListContainer = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+`
 const Title = styled.h3`
 margin-bottom: 4vh;
+font-size: 2rem;
 `
 const TitleLoja = styled.h3`
 margin-bottom: 4vh;
 display:flex;
 justify-content:center;
+`
+const LabelContainer = styled.div`
+display: flex;
+flex-direction: column;
+margin-bottom: 5vh;
 `
 const Label = styled.label`
 display: flex;
@@ -78,12 +95,15 @@ width: 70%;
 margin-bottom: 2vh;
 `
 const Selecoes = styled.select`
-background-color:#8F85D8;
+background-color:#8E6385;
 height: 60%;
 width: 50%;
 margin-top:10px;
 margin-left: 10px;
 border-radius: 15px;
+padding: 8px;
+font-size: 0.9rem;
+border: 2px solid black;
 `
 const OpcoesSel = styled.option`
 `
@@ -96,6 +116,7 @@ margin-bottom: 20px;
 const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Poppins', sans-serif;
+    background-color: #9F8DB8;
   }
 `
 
@@ -243,18 +264,20 @@ class App extends React.Component {
         <GlobalStyle />
         <FilterContainer>
           <Title>Filtros</Title>
-          <Label>
-            Valor Mínimo
-            <input type="number" onChange={this.handleChangeMinValue} value={this.state.minValueInput} />
-          </Label>
-          <Label>
-            Valor Máximo
-            <input type="number" onChange={this.handleChangeMaxValue} value={this.state.maxValueInput} />
-          </Label>
-          <Label>
-            Busca por nome:
-            <input type="text" onChange={this.handleChangeName} placeholder='Nome do produto' />
-          </Label>
+          <LabelContainer>
+            <Label>
+              Valor Mínimo:
+              <input type="number" onChange={this.handleChangeMinValue} value={this.state.minValueInput} />
+            </Label>
+            <Label>
+              Valor Máximo:
+              <input type="number" onChange={this.handleChangeMaxValue} value={this.state.maxValueInput} />
+            </Label>
+            <Label>
+              Busca por nome:
+              <input type="text" onChange={this.handleChangeName} placeholder='Nome do produto' />
+            </Label>
+          </LabelContainer>
         </FilterContainer>
         <CentralContainer>
           <meteorito1 />
@@ -274,8 +297,10 @@ class App extends React.Component {
           </BottomContainer>
         </CentralContainer>
         <CartContainer>
-          <Title>Carrinho:</Title>
-          {cartList}
+          <CartListContainer>
+            <Title>Carrinho:</Title>
+            {cartList}
+          </CartListContainer>
           <p>Valor Total: R${this.state.valorTotal},00</p>
         </CartContainer>
       </MainContainer>
