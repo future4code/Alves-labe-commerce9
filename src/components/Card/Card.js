@@ -7,7 +7,7 @@ display: flex;
 flex-direction: column;
 width: 18vw;
 border: 1px solid black;
-height: 100%;
+height: 300px;
 margin-bottom: 1vh;
 box-shadow: 2px 2px 8px #A13B6D;
 `
@@ -16,13 +16,14 @@ const MainContainer2 = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: flex-end;
-height: 35%;
+/* height: 35%; */
 border-top: 1px solid black;
 `
 
 const ImagemME = styled.img`
-height: 70%;
-width: 100%;
+height: 80%;
+width: 80%;
+margin: auto;
 `
 
 const Infos = styled.b`
@@ -38,7 +39,7 @@ box-shadow: 5px 5px 8px white;
 `
 
 const ImageContainer = styled.div`
-height: 100%;
+height: 190px;
 display: flex;
 align-items: center;
 `
