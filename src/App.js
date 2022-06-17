@@ -6,7 +6,8 @@ import meteorito2 from './img/meteorito2.png'
 import meteorito3 from './img/meteorito3.png'
 import meteorito4 from './img/meteorito4.png'
 import ItemCarrinho from './components/Card/ItemCarrinho/ItemCarrinho.js'
-import LogoTitulo from './img/LogoTitulo.png'
+import logoTitulo from './img/LogoTitulo.png'
+import { createGlobalStyle } from 'styled-components'
 
 const CentralContainer = styled.div`
 width: 80%;
@@ -20,25 +21,23 @@ const TopContainer = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-margin-right: 5vw;
 `
 
 const BottomContainer = styled.div`
 height: 100%;
-display: flex;
-flex-wrap: wrap;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
 gap: 2%;
-flex-direction:row;
 `
 
 const FilterSelect = styled.div`
 display:flex;
 padding-bottom: 5%;
+width: 35%;
 `
 
 const MainContainer = styled.div`
 padding: 16px;
-height: 100vh;
 display: flex;
 gap: 1%;
 background-color:#9F8DB8;
@@ -80,12 +79,24 @@ margin-bottom: 2vh;
 `
 const Selecoes = styled.select`
 background-color:#8F85D8;
-height :80%;
-width:40%;
+height: 60%;
+width: 50%;
 margin-top:10px;
+margin-left: 10px;
 border-radius: 15px;
 `
 const OpcoesSel = styled.option`
+`
+const Logo = styled.img`
+width: 55%;
+margin: auto;
+margin-bottom: 20px;
+`
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
 `
 
 class App extends React.Component {
@@ -93,7 +104,7 @@ class App extends React.Component {
     minValueInput: 10,
     maxValueInput: 1050,
     nameInput: '',
-    OrdenarLista:"",
+    OrdenarLista: "",
     produtos: [
       {
         nome: "Meteorito",
@@ -131,25 +142,25 @@ class App extends React.Component {
   handleChangeName = (event) => {
     this.setState({ nameInput: event.target.value })
   }
-  
+
   handleChangeOrdem = (event) => {
-  this.setState ({OrdenarLista:event.target.value})
+    this.setState({ OrdenarLista: event.target.value })
   }
 
   addCartItem = (nome, preco) => {
-    this.setState({valorTotal: this.state.valorTotal + preco})
+    this.setState({ valorTotal: this.state.valorTotal + preco })
     const newCartItems = this.state.cartItems.map(obj => {
       if (obj.nome === nome) {
-        return {...obj, quantity: obj.quantity + 1};
+        return { ...obj, quantity: obj.quantity + 1 };
       }
-    
+
       return obj;
     })
-    this.setState({cartItems: newCartItems})
+    this.setState({ cartItems: newCartItems })
     const nameList = this.state.cartItems.map((item) => {
       return item.nome
     })
-    if(nameList.includes(nome)){
+    if (nameList.includes(nome)) {
       return
     }
     const newItem = {
@@ -157,33 +168,33 @@ class App extends React.Component {
       quantity: 1,
       preco: preco
     }
-    
-		const newCartItems1 = [...this.state.cartItems, newItem] 
-		this.setState({ cartItems: newCartItems1,})
-    
+
+    const newCartItems1 = [...this.state.cartItems, newItem]
+    this.setState({ cartItems: newCartItems1, })
+
   }
 
   removeCartItem = (nome, quantity, preco) => {
-    this.setState({valorTotal: this.state.valorTotal - preco})
-    if (quantity <= 1){
+    this.setState({ valorTotal: this.state.valorTotal - preco })
+    if (quantity <= 1) {
       const newCartItems = this.state.cartItems.filter((item) => {
         return item.nome != nome
       })
-      this.setState({cartItems: newCartItems})
+      this.setState({ cartItems: newCartItems })
       return
     }
     const newQuantity = this.state.cartItems.map(obj => {
       if (obj.nome === nome) {
-        return {...obj, quantity: quantity - 1};
+        return { ...obj, quantity: quantity - 1 };
       }
-    
+
       return obj;
     })
-    this.setState({cartItems: newQuantity})
+    this.setState({ cartItems: newQuantity })
     const nameList = this.state.cartItems.map((item) => {
       return item.nome
     })
-    if(nameList.includes(nome)){
+    if (nameList.includes(nome)) {
       return
     }
   }
@@ -192,11 +203,11 @@ class App extends React.Component {
 
     const filtroOrdem = this.state.produtos
     const optionOrder = this.state.OrdenarLista
-    filtroOrdem.sort(function(a,b){
-      if(optionOrder === "Cres" ){
-        return a.preco < b.preco ? -1: a.preco> b.preco ? 1: 0;
-      }else{
-        return b.preco < a.preco ? -1: b.preco> a.preco ? 1: 0;
+    filtroOrdem.sort(function (a, b) {
+      if (optionOrder === "Cres") {
+        return a.preco < b.preco ? -1 : a.preco > b.preco ? 1 : 0;
+      } else {
+        return b.preco < a.preco ? -1 : b.preco > a.preco ? 1 : 0;
       }
     });
 
@@ -205,16 +216,16 @@ class App extends React.Component {
     })
 
     const listaFiltrada = listaFiltrada2.map((produto) => {
-        return (
-          <Card
-            addCartItem={this.addCartItem}
-            nome={produto.nome}
-            preco={produto.preco}
-            imagem={produto.imagem}>
-          </Card>
-        )
+      return (
+        <Card
+          addCartItem={this.addCartItem}
+          nome={produto.nome}
+          preco={produto.preco}
+          imagem={produto.imagem}>
+        </Card>
+      )
     })
-    
+
     const cartList = this.state.cartItems.map((item) => {
       return (
         <ItemCarrinho
@@ -229,6 +240,7 @@ class App extends React.Component {
 
     return (
       <MainContainer>
+        <GlobalStyle />
         <FilterContainer>
           <Title>Filtros</Title>
           <Label>
@@ -245,8 +257,8 @@ class App extends React.Component {
           </Label>
         </FilterContainer>
         <CentralContainer>
-          <meteorito1/>
-          <TitleLoja>Loja 09 de METEORITOS</TitleLoja>
+          <meteorito1 />
+          <Logo src={logoTitulo} />
           <TopContainer>
             <p>Quantidade de produtos: {listaFiltrada2.length}</p>
             <FilterSelect>
