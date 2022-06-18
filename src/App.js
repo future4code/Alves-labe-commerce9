@@ -220,7 +220,33 @@ class App extends React.Component {
     }
   }
 
-  render() {
+  storageData = () => {
+    localStorage.setItem('cartItems', JSON.stringify(this.state.cartItems))
+    localStorage.setItem('totalValue', JSON.stringify(this.state.valorTotal))
+  }
+
+  getData = () => {
+    const cartItemsString = localStorage.getItem('cartItems')
+    if (!cartItemsString) {
+      return
+    }
+    const storageCartItems = JSON.parse(cartItemsString)
+    this.setState({cartItems: storageCartItems})
+
+    const valorTotalString = localStorage.getItem('totalValue')
+    const storageValorTotal = JSON.parse(valorTotalString)
+    this.setState({valorTotal: storageValorTotal})
+  }
+
+  componentDidMount() {
+    this.getData()
+  }
+
+  componentDidUpdate() {
+    this.storageData()
+  }
+
+    render() {
 
     const filtroOrdem = this.state.produtos
     const optionOrder = this.state.OrdenarLista
