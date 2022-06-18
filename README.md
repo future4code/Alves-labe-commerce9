@@ -7,7 +7,7 @@
 - Bruno Adonai Rodrigues Monteiro
 
 ### Link para o projeto
-[https://direful-taste.surge.sh/](https://ruddy-room.surge.sh/)
+https://ruddy-room.surge.sh/
 
 ### Sobre
 Criamos uma interface de ecommerce para uma loja de meteoritos.
