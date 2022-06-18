@@ -15,12 +15,24 @@ height: 100%;
 display: flex;
 flex-direction: column;
 padding: 16px;
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+flex-wrap: wrap;
+width: 100%;
+}
+
 `
 
 const TopContainer = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+font-size: 0.8rem;
+flex-direction: column;
+align-items: center;
+}
 `
 
 const BottomContainer = styled.div`
@@ -28,6 +40,12 @@ height: 100%;
 display: grid;
 grid-template-columns: repeat(3, 1fr);
 gap: 2%;
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+display: flex;
+flex-wrap: wrap;
+height: auto;
+}
 `
 
 const FilterSelect = styled.div`
@@ -35,39 +53,76 @@ display:flex;
 padding-bottom: 5%;
 width: 35%;
 justify-content: flex-end;
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+justify-content: center;
+width: 100%;
+align-items: center;
+}
 `
 
 const MainContainer = styled.div`
 height: 100%;
 padding: 16px;
 display: flex;
+flex-direction: column;
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+align-items: center;
+}
+`
+
+const SubContainer = styled.div`
+display: flex;
 gap: 1%;
+justify-content: center;
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+align-items: center;
+flex-direction: column;
+}
 `
 const FilterContainer = styled.div`
 display: flex;
 flex-direction: column; 
 justify-content: space-between;
 border: 2px solid black;
-width: 18vw;
+width: 20vw;
 height: 42vh;
 padding: 16px;
 box-shadow: 10px 15px 8px #5F4B8B;
 background-color:#8E6385;
 border-radius: 24px;
-margin-top: 20vh;
+margin-top: 10vh;
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+width: 90%;
+height: 20vh;
+justify-content: center;
+align-items: center;
+margin-top: 5vh;
+padding: 0;
+padding-bottom: 16px;
+}
 `
 const CartContainer = styled.div`
 display: flex;
 flex-direction: column; 
 border: 2px solid black;
 justify-content: space-between;
-width: 25vw;
+width: 20vw;
 height: 42vh;
 padding: 16px;
 box-shadow: 10px 15px 8px #5F4B8B;
 background-color:#8E6385;
 border-radius: 24px;
-margin-top: 20vh;
+margin-top: 10vh;
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+width: 90%;
+height: auto;
+margin-top: 0;
+}
 `
 const CartListContainer = styled.div`
 display: flex;
@@ -77,6 +132,11 @@ justify-content: flex-start;
 const Title = styled.h3`
 margin-bottom: 4vh;
 font-size: 2rem;
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+font-size: 1.4rem;
+margin-bottom: 1vh;
+}
 `
 const TitleLoja = styled.h3`
 margin-bottom: 4vh;
@@ -87,30 +147,53 @@ const LabelContainer = styled.div`
 display: flex;
 flex-direction: column;
 margin-bottom: 5vh;
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+margin-bottom: 1vh;
+font-size: 0.8rem;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: center;
+gap: 10%;
+}
 `
 const Label = styled.label`
 display: flex;
 flex-direction: column;
 width: 70%;
 margin-bottom: 2vh;
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+margin-bottom: 1vh;
+width: 40%;
+}
 `
 const Selecoes = styled.select`
 background-color:#8E6385;
 height: 60%;
 width: 50%;
-margin-top:10px;
+margin-top: 10px;
 margin-left: 10px;
 border-radius: 15px;
 padding: 8px;
 font-size: 0.9rem;
 border: 2px solid black;
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+width: 40vw;
+margin-left: 2vw;
+padding: 4px;
+margin-top: 0;
+}
 `
 const OpcoesSel = styled.option`
 `
 const Logo = styled.img`
-width: 55%;
+width: 35%;
 margin: auto;
 margin-bottom: 20px;
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+margin-bottom: 0;
+width: 100%;
+}
 `
 
 const GlobalStyle = createGlobalStyle`
@@ -231,11 +314,11 @@ class App extends React.Component {
       return
     }
     const storageCartItems = JSON.parse(cartItemsString)
-    this.setState({cartItems: storageCartItems})
+    this.setState({ cartItems: storageCartItems })
 
     const valorTotalString = localStorage.getItem('totalValue')
     const storageValorTotal = JSON.parse(valorTotalString)
-    this.setState({valorTotal: storageValorTotal})
+    this.setState({ valorTotal: storageValorTotal })
   }
 
   componentDidMount() {
@@ -246,7 +329,7 @@ class App extends React.Component {
     this.storageData()
   }
 
-    render() {
+  render() {
 
     const filtroOrdem = this.state.produtos
     const optionOrder = this.state.OrdenarLista
@@ -288,47 +371,48 @@ class App extends React.Component {
     return (
       <MainContainer>
         <GlobalStyle />
-        <FilterContainer>
-          <Title>Filtros</Title>
-          <LabelContainer>
-            <Label>
-              Valor Mínimo:
-              <input type="number" onChange={this.handleChangeMinValue} value={this.state.minValueInput} />
-            </Label>
-            <Label>
-              Valor Máximo:
-              <input type="number" onChange={this.handleChangeMaxValue} value={this.state.maxValueInput} />
-            </Label>
-            <Label>
-              Busca por nome:
-              <input type="text" onChange={this.handleChangeName} placeholder='Nome do produto' />
-            </Label>
-          </LabelContainer>
-        </FilterContainer>
-        <CentralContainer>
-          <meteorito1 />
-          <Logo src={logoTitulo} />
-          <TopContainer>
-            <p>Quantidade de produtos: {listaFiltrada2.length}</p>
-            <FilterSelect>
-              <p>Ordenar por:</p>
-              <Selecoes onChange={this.handleChangeOrdem}>
-                <OpcoesSel value="Cres">Valor Crescente</OpcoesSel>
-                <OpcoesSel value="DCres">Valor Decrescente</OpcoesSel>
-              </Selecoes>
-            </FilterSelect>
-          </TopContainer>
-          <BottomContainer>
-            {listaFiltrada}
-          </BottomContainer>
-        </CentralContainer>
-        <CartContainer>
-          <CartListContainer>
-            <Title>Carrinho:</Title>
-            {cartList}
-          </CartListContainer>
-          <p>Valor Total: R${this.state.valorTotal},00</p>
-        </CartContainer>
+        <Logo src={logoTitulo} />
+        <SubContainer>
+          <FilterContainer>
+            <Title>Filtros</Title>
+            <LabelContainer>
+              <Label>
+                Valor Mínimo:
+                <input type="number" onChange={this.handleChangeMinValue} value={this.state.minValueInput} />
+              </Label>
+              <Label>
+                Valor Máximo:
+                <input type="number" onChange={this.handleChangeMaxValue} value={this.state.maxValueInput} />
+              </Label>
+              <Label>
+                Busca por nome:
+                <input type="text" onChange={this.handleChangeName} placeholder='Nome do produto' />
+              </Label>
+            </LabelContainer>
+          </FilterContainer>
+          <CentralContainer>
+            <TopContainer>
+              <p>Quantidade de produtos: {listaFiltrada2.length}</p>
+              <FilterSelect>
+                <p>Ordenar por:</p>
+                <Selecoes onChange={this.handleChangeOrdem}>
+                  <OpcoesSel value="Cres">Valor Crescente</OpcoesSel>
+                  <OpcoesSel value="DCres">Valor Decrescente</OpcoesSel>
+                </Selecoes>
+              </FilterSelect>
+            </TopContainer>
+            <BottomContainer>
+              {listaFiltrada}
+            </BottomContainer>
+          </CentralContainer>
+          <CartContainer>
+            <CartListContainer>
+              <Title>Carrinho:</Title>
+              {cartList}
+            </CartListContainer>
+            <p>Valor Total: R${this.state.valorTotal},00</p>
+          </CartContainer>
+        </SubContainer>
       </MainContainer>
     )
   }
