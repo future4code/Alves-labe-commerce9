@@ -10,6 +10,11 @@ border: 2px solid black;
 margin-bottom: 1vh;
 box-shadow: 2px 2px 15px #5F4B8B;
 border-radius: 24px;
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+width: 43vw;
+height: 50vh;
+}
 `
 
 const MainContainer2 = styled.div`
@@ -18,6 +23,11 @@ flex-direction: column;
 justify-content: flex-end;
 border-top: 2px solid black;
 padding-top: 2vh;
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+font-size: 1rem;
+}
+
 `
 
 const ImagemME = styled.img`
@@ -27,7 +37,12 @@ margin: auto;
 `
 
 const Infos = styled.b`
-    margin: 0 1vw;
+margin: 0 1vw;
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+padding-left: 3%;
+align-self: center;
+}
 
 `
 const ButtonAdd = styled.button`
@@ -45,6 +60,12 @@ padding: 14px;
     border: 3px solid white;
     cursor: pointer;
 }
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+text-align: center;
+font-size: 0.7rem;
+}
+
 `
 
 const ImageContainer = styled.div`

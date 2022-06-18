@@ -8,7 +8,7 @@ align-items: center;
 `
 
 const RemoveBtn = styled.button`
-width: 40%;
+width: 30%;
 border-radius: 15px;
 background-color:#8E6385;
 font-weight: bold;
