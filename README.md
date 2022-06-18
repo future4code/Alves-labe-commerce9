@@ -1,4 +1,4 @@
-### Projeto LabECommerce
+# Projeto LabECommerce
 ![Alt text](./src/img/LogoTitulo.png "Logo")
 
 ### Integrantes do Grupo 9
