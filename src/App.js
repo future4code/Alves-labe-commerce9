@@ -342,7 +342,7 @@ class App extends React.Component {
     });
 
     const listaFiltrada2 = this.state.produtos.filter((produto) => {
-      return this.state.minValueInput <= produto.preco && this.state.maxValueInput >= produto.preco && produto.nome.toLowerCase().includes(this.state.nameInput)
+      return this.state.minValueInput <= produto.preco && this.state.maxValueInput >= produto.preco && produto.nome.toLowerCase().includes(this.state.nameInput.toLowerCase())
     })
 
     const listaFiltrada = listaFiltrada2.map((produto) => {
